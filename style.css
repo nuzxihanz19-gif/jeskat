@@ -1,0 +1,83 @@
+body {
+font-family: 'Poppins', sans-serif;
+background: linear-gradient(160deg, #F5F7F1 0%, #F5F7F1 80%);
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+margin: 0;
+color: #000;
+}
+
+.container {
+text-align: center;
+width: 90%;
+max-width: 400px;
+}
+
+.main-logo {
+width: 150px;
+height: 150px;
+border-radius: 50%;
+margin-bottom: 10px;
+}
+
+h1 {
+font-size: 20px;
+font-weight: 700;
+margin: 10px 0 5px 0;
+}
+
+.sub {
+font-size: 16px;
+font-weight: 500;
+margin-bottom: 15px;
+}
+
+.socials img {
+width: 30px;
+margin-bottom: 20px;
+transition: transform 0.2s;
+}
+
+.socials img:hover {
+transform: scale(1.1);
+}
+
+.links {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+.link-item {
+display: flex;
+align-items: center;
+background: #38493F;
+padding: 12px 16px;
+border-radius: 12px;
+text-decoration: none;
+color: #F5F7F1;
+font-weight: 600;
+transition: all 0.2s ease;
+box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.link-item img {
+width: 40px;
+height: 40px;
+border-radius: 8px;
+margin-right: 12px;
+}
+
+.link-item:hover {
+transform: translateY(-3px);
+box-shadow: 0 4px 40px rgba(0,0,0,0.2);
+}
+
+footer {
+font-size: 13px;
+margin-top: 25px;
+color: #000;
+}
+
