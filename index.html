@@ -1,63 +1,669 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeskat.id - AI Powered</title>
+    <!-- Mengambil Icon Panah & Sparkles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Meta Tags -->
+    <meta name="theme-color" content="#CFDFE3">
+    <meta name="description" content="Jeskat.id – Website AI & Kreativitas Digital">
 
-<link rel="manifest" href="manifest.json">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>zydklink</title>
-  <link rel="stylesheet" href="style.css">
-<link rel="apple-touch-icon" href="favicon.png.png" />
-<meta name="theme-color" content="#000000">
+    <style>
+        /* --- 1. SETUP DASAR --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-<meta name="title" content="Jeskat.id – Website AI & Kreativitas Digital">
-<meta name="description" content="Jeskat.id adalah platform tempat ide, teknologi, dan kreativitas bertemu. Temukan inspirasi, AI tools, dan panduan membangun masa depan digital.">
-<meta name="keywords" content="AI, teknologi, kreativitas, Jeskat, digital, website, Ziyad">
-<meta name="author" content="Ziyad">
-<meta name="robots" content="index, follow">
-<meta property="og:title" content="Jeskat.id – AI & Kreativitas Digital">
-<meta property="og:description" content="Temukan dunia AI, inspirasi, dan strategi digital di Jeskat.id.">
-<meta property="og:image" content="https://jeskatid.vercel.app/logo.png">
-<meta property="og:url" content="https://jeskatid.vercel.app/">
-<meta name="twitter:card" content="summary_large_image">
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #CFDFE3; /* Warna Background Vincoo */
+            color: #1c1c1e;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden; /* Mencegah scroll horizontal jika animasi melebar */
+        }
+
+        /* --- 2. CONTAINER UTAMA --- */
+        .container {
+            width: 100%;
+            max-width: 420px; /* Lebar ideal untuk HP */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- 3. PROFILE HEADER --- */
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px;
+            text-align: center;
+            /* Animasi Masuk */
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+        }
+
+        .avatar-box {
+            width: 110px;
+            height: 110px;
+            padding: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover; /* Agar gambar tidak gepeng */
+            border: 2px solid #fff;
+        }
+
+        .username {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 5px;
+        }
+
+        .bio {
+            font-size: 0.95rem;
+            color: #555;
+            font-weight: 400;
+            background: rgba(255,255,255,0.4);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        /* --- 4. STYLE KARTU LINK (GLASSMORPHISM) --- */
+        .link-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.65); /* Transparan Kaca */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            width: 100%;
+            padding: 16px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #1c1c1e;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            cursor: pointer;
+            
+            /* Animasi Transisi Halus */
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            
+            /* State Awal untuk Animasi Muncul */
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+            animation: slideUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        /* Efek Hover */
+        .link-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #fff;
+        }
+
+        .link-card:active {
+            transform: scale(0.98);
+        }
+
+        /* Style Khusus untuk AI Card */
+        .ai-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(230, 240, 255, 0.8) 100%);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        .ai-card:hover {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+
+        .ai-badge {
+            font-size: 0.7rem;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            font-weight: bold;
+        }
+
+        /* Bagian Icon Kiri */
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+            flex-shrink: 0;
+            font-size: 1.5rem; /* Untuk icon font */
+        }
+        
+        .ai-icon-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .card-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Bagian Teks Tengah */
+        .card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-sub {
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        /* Icon Panah Kanan */
+        .arrow-icon {
+            color: #aaa;
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+        }
+
+        .link-card:hover .arrow-icon {
+            transform: translateX(3px);
+            color: #000;
+        }
+
+        /* --- 5. FOOTER --- */
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #666;
+            opacity: 0.8;
+            line-height: 1.5;
+            animation: fadeIn 1s ease 1s forwards;
+            opacity: 0;
+        }
+
+        /* --- 6. MODAL CHAT (AI FEATURE) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* Muncul dari bawah di HP */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .chat-window {
+            width: 100%;
+            max-width: 500px;
+            height: 85vh; /* Tinggi modal */
+            background: #F5F7F1;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            overflow: hidden;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+        }
+
+        @media (min-width: 500px) {
+            .modal-overlay {
+                align-items: center;
+                padding: 20px;
+            }
+            .chat-window {
+                height: 600px;
+                border-radius: 25px;
+            }
+        }
+
+        .modal-overlay.active .chat-window {
+            transform: translateY(0);
+        }
+
+        .chat-header {
+            padding: 18px 25px;
+            background: white;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-title-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-title-group h3 {
+            font-size: 1.1rem;
+            color: #1c1c1e;
+        }
+        
+        .chat-status {
+            font-size: 0.75rem;
+            color: #25D366;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .chat-status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #25D366;
+            border-radius: 50%;
+        }
+
+        .close-btn {
+            background: #f0f0f0;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .close-btn:hover { background: #e0e0e0; transform: rotate(90deg); }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: #fcfcfc;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            position: relative;
+            word-wrap: break-word;
+        }
+
+        .message.ai {
+            align-self: flex-start;
+            background: white;
+            color: #333;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+        }
+        
+        .typing-indicator {
+            align-self: flex-start;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+            display: none; /* Sembunyikan scr default */
+            gap: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #ccc;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+
+        .chat-input-area {
+            padding: 15px 20px;
+            background: white;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex-grow: 1;
+            border: 1px solid #e0e0e0;
+            border-radius: 25px;
+            padding: 12px 20px;
+            outline: none;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+        .chat-input:focus { border-color: #764ba2; }
+
+        .send-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 10px rgba(118, 75, 162, 0.3);
+        }
+        .send-btn:hover { transform: scale(1.05); }
+        .send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* --- 7. KEYFRAMES ANIMASI --- */
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.6); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 0.8; }
+        }
+
+        /* Mengatur urutan muncul (Delay) */
+        .link-card:nth-child(2) { animation-delay: 0.1s; } 
+        .link-card:nth-child(3) { animation-delay: 0.2s; } 
+        .link-card:nth-child(4) { animation-delay: 0.3s; } 
+        .link-card:nth-child(5) { animation-delay: 0.4s; } /* Card baru */
+
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Logo Utama -->
-    <img src="jeskoidzyd.png" alt="Logo" class="main-logo">
 
-    <!-- Judul -->
-    <h1>Jesko.id</h1>
-    <p class="sub">⬇️ Link nya ada di bawah ⬇️</p>
+    <div class="container">
+        
+        <!-- BAGIAN 1: PROFILE -->
+        <div class="profile-section">
+            <div class="avatar-box">
+                <img src="jeskoidzyd.png" alt="Jesko Avatar" class="avatar" onerror="this.src='https://via.placeholder.com/150'">
+            </div>
+            <h1 class="username">Jesko.id</h1>
+            <p class="bio">⬇️ Link & AI Assistant ⬇️</p>
+        </div>
 
-    <!-- Tombol Link -->
-    <div class="links">
-      <a href="https://takeapeak.ai/invite/Id2qppW8l5Qj7wCrR8TB9afiW55gh2Ff" target="_blank" class="link-item">
-        <img src="peakai.jpeg" alt="peakai">
-        Peak AI
-      </a>
+        <!-- BAGIAN 2: DAFTAR LINK -->
+        
+        <!-- NEW FEATURE: AI ASSISTANT CARD -->
+        <div class="link-card ai-card" onclick="openChat()">
+            <div class="card-icon ai-icon-bg">
+                <i class="fas fa-sparkles"></i>
+            </div>
+            <div class="card-content">
+                <span class="card-title">Tanya Jesko AI <span class="ai-badge">NEW</span></span>
+                <span class="card-sub">Cari ide konten & tanya soal AI</span>
+            </div>
+            <i class="fas fa-chevron-right arrow-icon"></i>
+        </div>
 
+        <!-- Link 1: Peak AI -->
+        <a href="https://takeapeak.ai/invite/Id2qppW8l5Qj7wCrR8TB9afiW55gh2Ff" target="_blank" class="link-card">
+            <div class="card-icon">
+                <img src="peakai.jpeg" alt="Peak AI">
+            </div>
+            <div class="card-content">
+                <span class="card-title">Peak AI</span>
+                <span class="card-sub">AI Tools & Invite</span>
+            </div>
+            <i class="fas fa-chevron-right arrow-icon"></i>
+        </a>
 
-      <a href="https://youtube.com/@shortcast.id15?si=WT0fjB7Z1QVX_9gz" target="_blank" class="link-item">
-        <img src="YouTube.png" alt="youtube">
-        YouTube 
-      </a>
-      
-      
-      <a href="https://www.tiktok.com/@jesko.id?_d=secCgYIASAHKAESPgo88Re4w%2FeULtlF%2FV5WiUhinSOl%2FzdZxBb9h28Oo9aXmU2xvK%2FLXtNxL1eTjTVu0zk7NT3Lx6PVxkn16PpPGgA%3D&_r=1&_svg=1&checksum=3a566fdbfe93054ffe348c24738b7bf3e9289904f90fc05b75d20bb454eeedfc&lang=id-ID&sec_uid=MS4wLjABAAAAOvMpobwP1rpNxR7ZhB2Dr2ijy9uqb1VSHB92vLeBHLn7HusMG0MDxJ2zDwJWcpfM&sec_user_id=MS4wLjABAAAAOvMpobwP1rpNxR7ZhB2Dr2ijy9uqb1VSHB92vLeBHLn7HusMG0MDxJ2zDwJWcpfM&share_app_id=1340&share_author_id=7404714002549294085&share_link_id=552e5a73-6c2b-444c-9170-628d5625e163&share_scene=1&sharer_language=id&source=h5_m&timestamp=1761801673&u_code=efka88l9mcjk69&ugbiz_name=Account&user_id=7404714002549294085&utm_campaign=client_share&utm_source=copy" target="_blank" class="link-item">
-        <img src="tiktok.png" alt="tiktok">
-        Tiktok 
-      </a>
+        <!-- Link 2: YouTube -->
+        <a href="https://youtube.com/@shortcast.id15?si=WT0fjB7Z1QVX_9gz" target="_blank" class="link-card">
+            <div class="card-icon">
+                <img src="YouTube.png" alt="YouTube">
+            </div>
+            <div class="card-content">
+                <span class="card-title">YouTube</span>
+                <span class="card-sub">@shortcast.id15</span>
+            </div>
+            <i class="fas fa-chevron-right arrow-icon"></i>
+        </a>
+
+        <!-- Link 3: TikTok -->
+        <a href="https://www.tiktok.com/@jesko.id" target="_blank" class="link-card">
+            <div class="card-icon">
+                <img src="tiktok.png" alt="TikTok">
+            </div>
+            <div class="card-content">
+                <span class="card-title">TikTok</span>
+                <span class="card-sub">Konten Pendek & Kreatif</span>
+            </div>
+            <i class="fas fa-chevron-right arrow-icon"></i>
+        </a>
+
+        <!-- BAGIAN 3: FOOTER -->
+        <div class="footer">
+            Bergabung dengan <b>Jesko.id</b> hari ini<br>
+            di YouTube & Tiktok<br><br>
+            © Copyright 2025 Jesko.id
+        </div>
+
     </div>
 
-    <!-- Footer -->
-    <footer>
-      Bergabung dengan <b>Jesko.id</b> hari ini di YouTube & Tiktok 
-    </footer>
-    
-    <footer> 
-      <b>©Copyright (c) 2025 Jesko.id</b>
-    </footer>
-  </div>
+    <!-- MODAL CHAT STRUCTURE -->
+    <div class="modal-overlay" id="chatModal">
+        <div class="chat-window">
+            <div class="chat-header">
+                <div class="chat-title-group">
+                    <i class="fas fa-robot" style="color: #764ba2; font-size: 1.2rem;"></i>
+                    <div>
+                        <h3>Jesko Assistant</h3>
+                        <div class="chat-status">Online</div>
+                    </div>
+                </div>
+                <button class="close-btn" onclick="closeChat()"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <!-- Welcome Message -->
+                <div class="message ai">
+                    Halo! Gw asisten virtual Jesko.id ✨<br><br>
+                    Butuh ide konten TikTok/YouTube? Atau mau rekomendasi tools AI? Tanya aja disini! 👇
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            
+            <div class="chat-input-area">
+                <input type="text" class="chat-input" id="userInput" placeholder="Tulis pesan lo disini..." onkeypress="handleEnter(event)">
+                <button class="send-btn" id="sendBtn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- KONFIGURASI GEMINI API ---
+        const apiKey = "AIzaSyDitIwZ2zvIxkFBQompe1Do3DFB7y0Hevg"; // API Key diisi oleh sistem secara otomatis
+        // Gunakan model flash-preview untuk respon cepat dan cerdas
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+        // DOM Elements
+        const modal = document.getElementById('chatModal');
+        const messagesContainer = document.getElementById('chatMessages');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const typingIndicator = document.getElementById('typingIndicator');
+
+        // Buka Chat
+        function openChat() {
+            modal.classList.add('active');
+            // Fokus ke input setelah animasi selesai (sedikit delay)
+            setTimeout(() => userInput.focus(), 300);
+        }
+
+        // Tutup Chat
+        function closeChat() {
+            modal.classList.remove('active');
+        }
+
+        // Tutup jika klik di luar area chat
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeChat();
+        });
+
+        // Handle Enter Key
+        function handleEnter(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        // --- LOGIKA UTAMA CHAT ---
+        async function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            // 1. Tampilkan Pesan User
+            addMessage(text, 'user');
+            userInput.value = '';
+            
+            // Disable input saat loading
+            setInputState(false);
+            
+            // 2. Tampilkan Indikator Mengetik
+            showTyping(true);
+
+            try {
+                // 3. Panggil API Gemini
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{ text: text }]
+                        }],
+                        // Instruksi Sistem (Persona AI)
+                        systemInstruction: {
+                            parts: [{ text: "Kamu adalah Jesko AI, asisten virtual cerdas dari Jeskat.id (sebuah brand tentang AI dan Kreativitas Digital). Tugasmu adalah membantu pengguna menemukan ide konten kreatif (untuk TikTok/YouTube), merekomendasikan tools AI terbaru, dan menjawab pertanyaan seputar teknologi dengan gaya bahasa santai, ramah, dan kekinian (gunakan lo/gw sesekali, gunakan emoji). Jangan terlalu kaku. Jika ditanya siapa pembuatmu, jawab Jeskat.id. Berikan jawaban yang ringkas tapi padat." }]
+                        }
+                    })
+                });
+
+                const data = await response.json();
+                
+                // 4. Proses Jawaban
+                showTyping(false);
+                
+                if (data.candidates && data.candidates[0].content) {
+                    const reply = data.candidates[0].content.parts[0].text;
+                    // Format bold text markdown (**text**) menjadi HTML bold (<b>text</b>) sederhana
+                    const formattedReply = reply.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
+                    addMessage(formattedReply, 'ai');
+                } else {
+                    addMessage("Waduh, server AI lagi sibuk nih. Coba tanya lagi ya! 😅", 'ai');
+                }
+
+            } catch (error) {
+                console.error("API Error:", error);
+                showTyping(false);
+                addMessage("Yah, koneksi error nih. Cek internet lo bentar ya! 🔌", 'ai');
+            } finally {
+                setInputState(true);
+                userInput.focus();
+            }
+        }
+
+        // Helper: Tambah Pesan ke Layar
+        function addMessage(htmlContent, sender) {
+            const div = document.createElement('div');
+            div.className = `message ${sender}`;
+            div.innerHTML = htmlContent; // Gunakan innerHTML agar tag <br> dan <b> terbaca
+            messagesContainer.appendChild(div);
+            // Auto scroll ke bawah
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Helper: Show/Hide Typing Dots
+        function showTyping(show) {
+            typingIndicator.style.display = show ? 'flex' : 'none';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Helper: Enable/Disable Input
+        function setInputState(enabled) {
+            userInput.disabled = !enabled;
+            sendBtn.disabled = !enabled;
+        }
+    </script>
+
 </body>
 </html>
