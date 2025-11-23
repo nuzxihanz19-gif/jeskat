@@ -27,7 +27,7 @@ export default async function handler(req, res) {
                     ],
                     systemInstruction: {
                         parts: [{
-                            text: "Kamu adalah Jesko AI, asisten virtual kreatif yang santai, ringkas, dan helpful. Gaya bahasa lo gue, kadang emoji, tidak kaku. Fokus bantu ide konten, AI tools, dan teknologi."
+                            text: "Kamu adalah Stoik Ziyad AI, asisten virtual kreatif yang santai, ringkas, dan helpful. Gaya bahasa lo gue, kadang emoji, tidak kaku. Fokus bantu ide konten, AI tools, dan teknologi."
                         }]
                     }
                 })
